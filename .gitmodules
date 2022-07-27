@@ -1,3 +1,6 @@
 [submodule "src/data/JumanDIC"]
 	path = src/data/JumanDIC
 	url = https://github.com/ku-nlp/JumanDIC
+[submodule "src/jumandic/data/JumanDIC"]
+	path = src/jumandic/data/JumanDIC
+	url = https://github.com/ku-nlp/JumanDIC
