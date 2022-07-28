@@ -2,7 +2,7 @@ import dataclasses
 import pathlib
 from typing import List, Union
 
-from jumandic.sexp import is_empty_line
+from jumandic.sexp import is_empty_line, parse
 
 
 @dataclasses.dataclass
@@ -15,4 +15,5 @@ class ContentWord:
 
     @classmethod
     def from_line(cls, line: str) -> "ContentWord":
+        _ = parse(line)
         return cls()
