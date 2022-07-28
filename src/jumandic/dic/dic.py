@@ -1,20 +1,64 @@
-import dataclasses
-
-
-@dataclasses.dataclass
 class Dic:
-    Assert = None
-    AuxV = None
-    ContentW = None
-    Demonstrative = None
-    Lexicon_from_rengo = None
-    Noun_hukusi = None
-    Noun_keishiki = None
-    Noun_Suusi = None
-    Postp = None
-    Prefix = None
-    Rendaku = None
-    Rengo = None
-    Special = None
-    Suffix = None
-    Townname = None
+    @property
+    def Assert(self):
+        return ...
+
+    @property
+    def AuxV(self):
+        return ...
+
+    @property
+    def ContentW(self):
+        return ...
+
+    @property
+    def Demonstrative(self):
+        return ...
+
+    @property
+    def Lexicon_from_rengo(self):
+        return ...
+
+    @property
+    def Noun_hukusi(self):
+        return ...
+
+    @property
+    def Noun_keishiki(self):
+        return ...
+
+    @property
+    def Noun_koyuu(self):
+        return ...
+
+    @property
+    def Noun_suusi(self):
+        return ...
+
+    @property
+    def Postp(self):
+        return ...
+
+    @property
+    def Prefix(self):
+        return ...
+
+    @property
+    def Rendaku(self):
+        return ...
+
+    @property
+    def Rengo(self):
+        return ...
+
+    @property
+    def Special(self):
+        return ...
+
+    @property
+    def Suffix(self):
+        return ...
+
+    @property
+    def Townname(self):
+        return ...
