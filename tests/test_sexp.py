@@ -9,6 +9,8 @@ from jumandic.sexp import parse
     "input_text, expected",
     [
         (r"(名詞 (見出し語 犬)(意味情報))", [["名詞", ["見出し語", "犬"], ["意味情報"]]]),
+        (r"", []),
+        ("; コメント", []),
     ],
 )
 def test_parse(input_text: str, expected: Any) -> None:
