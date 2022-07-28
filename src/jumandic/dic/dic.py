@@ -1,10 +1,14 @@
 import pathlib
-from typing import Union
+from typing import List, Union
+
+from jumandic.dic.entries import ContentWord
 
 
 class Dic:
-    def __init__(self, path: Union[str, pathlib.Path] = None) -> None:
-        self.path = pathlib.Path(str(path)) / "grammar"
+    def __init__(self, path: Union[str, pathlib.Path]) -> None:
+        self.path = pathlib.Path(str(path)) / "dic"
+
+        self.content_words = ContentWord.from_file(self.path / "ContentW.dic")
 
     @property
     def Assert(self):
@@ -15,8 +19,8 @@ class Dic:
         return ...
 
     @property
-    def ContentW(self):
-        return ...
+    def ContentW(self) -> List[ContentWord]:
+        return self.content_words
 
     @property
     def Demonstrative(self):

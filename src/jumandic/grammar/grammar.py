@@ -3,7 +3,7 @@ from typing import Union
 
 
 class Grammar:
-    def __init__(self, path: Union[str, pathlib.Path] = None) -> None:
+    def __init__(self, path: Union[str, pathlib.Path]) -> None:
         self.path = pathlib.Path(str(path)) / "grammar"
 
     @property
