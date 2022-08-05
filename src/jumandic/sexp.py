@@ -66,7 +66,7 @@ def parse(input_text):
 
 def is_empty_line(line: str) -> bool:
     if line.strip() == "":
-        return False
+        return True
     if line.startswith(";"):
-        return False
-    return True
+        return True
+    return False

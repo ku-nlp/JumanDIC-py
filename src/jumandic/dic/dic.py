@@ -1,50 +1,49 @@
 import pathlib
-from typing import List, Union
+from typing import Union
 
-from jumandic.dic.entries import ContentWord
+from jumandic.dic.entries import ContentWordList
 
 
 class Dic:
     def __init__(self, path: Union[str, pathlib.Path]) -> None:
         self.path = pathlib.Path(str(path)) / "dic"
-
-        self.content_words = ContentWord.from_file(self.path / "ContentW.dic")
+        self.content_words = ContentWordList.from_file(self.path / "ContentW.dic")
 
     @property
     def Assert(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def AuxV(self):
-        return ...
+        raise NotImplementedError
 
     @property
-    def ContentW(self) -> List[ContentWord]:
+    def ContentW(self) -> ContentWordList:
         return self.content_words
 
     @property
     def Demonstrative(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Lexicon_from_rengo(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Noun_hukusi(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Noun_keishiki(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Noun_koyuu(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Noun_suusi(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Postp(self):
@@ -52,24 +51,24 @@ class Dic:
 
     @property
     def Prefix(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Rendaku(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Rengo(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Special(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Suffix(self):
-        return ...
+        raise NotImplementedError
 
     @property
     def Townname(self):
-        return ...
+        raise NotImplementedError
