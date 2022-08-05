@@ -71,9 +71,7 @@ class ContentWordDB(TinyDB):
     def all(self) -> List[ContentWord]:
         return [ContentWord(**doc) for doc in super().__getattr__("all")()]
 
-    def get(
-        self, cond: Optional[QueryLike] = None, doc_id: Optional[int] = None
-    ) -> Optional[ContentWord]:
+    def get(self, cond: Optional[QueryLike] = None, doc_id: Optional[int] = None) -> Optional[ContentWord]:
         doc = super().__getattr__("get")(cond, doc_id)
         if doc is None:
             return None
