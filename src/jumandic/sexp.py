@@ -1,15 +1,21 @@
 # https://github.com/ku-nlp/jumanpp/blob/master/script/sexp.py
 import re
+from typing import Any, List
 
 re_word = re.compile(r'^("(?:[^"\\]+|\\.)*")')
 re_symbol = re.compile(r'^([^\s"()]+)')
 
 
-def parse(input_text):
+def parse(input_text: str) -> Any:
+    """Parse an S-expression.
+
+    Args:
+        input_text: An S-expression.
+    """
     texts = input_text.split("\n")
     string = ""
-    stack = []
-    offsets = []
+    stack: Any = []
+    offsets: List[int] = []
     text_itr = iter(texts)
     while True:
         string = string.lstrip()
@@ -44,6 +50,7 @@ def parse(input_text):
                         raise Exception("Syntax error: end of target during string.")
         elif re_symbol.search(string):
             match = re_symbol.search(string)
+            assert match is not None
             offsets[0] -= 1
             stack.append(match.group(1))
             string = string[len(match.group(1)) :]
@@ -65,6 +72,11 @@ def parse(input_text):
 
 
 def is_empty_line(line: str) -> bool:
+    """Return True if the line is empty.
+
+    Args:
+        line: A line of text.
+    """
     if line.strip() == "":
         return True
     if line.startswith(";"):

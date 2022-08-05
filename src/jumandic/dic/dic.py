@@ -5,6 +5,12 @@ from jumandic.dic.entries import ContentWordDB
 
 
 class Dic:
+    """Dictionary class.
+
+    Args:
+        path: Path to the JumanDIC repository.
+    """
+
     def __init__(self, path: Union[str, pathlib.Path]) -> None:
         self.path = pathlib.Path(str(path)) / "dic"
         self.content_words = ContentWordDB.from_file(self.path / "ContentW.dic")

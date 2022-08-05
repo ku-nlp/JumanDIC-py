@@ -11,12 +11,14 @@ from jumandic.sexp import is_empty_line, parse
 
 @dataclasses.dataclass(frozen=True)
 class ContentWord:
-    surf: List[str]
-    reading: str
-    semantics: str
-    pos: str
-    subpos: str = "*"
-    conjtype: str = "*"
+    """Content word class."""
+
+    surf: List[str]  #: Surface form.
+    reading: str  #: Reading.
+    semantics: str  #: Semantics.
+    pos: str  #: Part of speech.
+    subpos: str = "*"  #: Subpart of speech.
+    conjtype: str = "*"  #: Conjugation type.
 
     @classmethod
     def from_text(cls, line: str) -> "ContentWord":
@@ -46,6 +48,26 @@ class ContentWord:
 
 
 class ContentWordDB(TinyDB):
+    """Content word database class.
+
+    Example::
+
+        from jumandic import JumanDIC
+        from tinydb import Query
+
+        d = JumanDIC()
+        q = Query()
+
+        # Find nouns:
+        nouns = d.dic.ContentW.search(q.pos == "名詞")
+
+        # Find words whose surface include "あく":
+        akus = d.dic.ContentW.search(q.surf.any(["あく"]))
+
+        # Find nouns whose surface include "あい":
+        aku_nouns = d.dic.ContentW.search((q.pos == "名詞") & (q.surf.any(["あく"])))
+    """
+
     def all(self) -> List[ContentWord]:
         return [ContentWord(**doc) for doc in super().__getattr__("all")()]
 
