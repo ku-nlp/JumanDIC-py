@@ -1,13 +1,13 @@
 import pathlib
 from typing import Union
 
-from jumandic.dic.entries import ContentWordList
+from jumandic.dic.entries import ContentWordDB
 
 
 class Dic:
     def __init__(self, path: Union[str, pathlib.Path]) -> None:
         self.path = pathlib.Path(str(path)) / "dic"
-        self.content_words = ContentWordList.from_file(self.path / "ContentW.dic")
+        self.content_words = ContentWordDB.from_file(self.path / "ContentW.dic")
 
     @property
     def Assert(self):
@@ -18,7 +18,7 @@ class Dic:
         raise NotImplementedError
 
     @property
-    def ContentW(self) -> ContentWordList:
+    def ContentW(self) -> ContentWordDB:
         return self.content_words
 
     @property

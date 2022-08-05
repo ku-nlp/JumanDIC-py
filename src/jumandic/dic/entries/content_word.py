@@ -1,7 +1,10 @@
 import dataclasses
 import pathlib
-from collections import UserList
-from typing import List, Union
+from typing import Iterator, List, Optional, Union
+
+from tinydb import TinyDB
+from tinydb.queries import QueryLike
+from tinydb.storages import MemoryStorage
 
 from jumandic.sexp import is_empty_line, parse
 
@@ -42,16 +45,36 @@ class ContentWord:
         return cls(**args)
 
 
-class ContentWordList(UserList[ContentWord]):
+class ContentWordDB(TinyDB):
+    def all(self) -> List[ContentWord]:
+        return [ContentWord(**doc) for doc in super().__getattr__("all")()]
+
+    def get(
+        self, cond: Optional[QueryLike] = None, doc_id: Optional[int] = None
+    ) -> Optional[ContentWord]:
+        doc = super().__getattr__("get")(cond, doc_id)
+        if doc is None:
+            return None
+        return ContentWord(**doc)
+
+    def search(self, cond: QueryLike) -> List[ContentWord]:
+        return [ContentWord(**doc) for doc in super().__getattr__("search")(cond)]
+
+    def __iter__(self) -> Iterator[ContentWord]:
+        for doc in super().__iter__():
+            yield ContentWord(**doc)
+
     @classmethod
-    def from_file(cls, path: Union[str, pathlib.Path]) -> "ContentWordList":
+    def from_file(cls, path: Union[str, pathlib.Path]) -> "ContentWordDB":
         path = pathlib.Path(str(path))
         return cls.from_text(path.read_text())
 
     @classmethod
-    def from_text(cls, text: str) -> "ContentWordList":
-        content_word_list = []
+    def from_text(cls, text: str) -> "ContentWordDB":
+        content_words = []
         for line in text.splitlines():
             if not is_empty_line(line):
-                content_word_list.append(ContentWord.from_text(line))
-        return cls(content_word_list)
+                content_words.append(dataclasses.asdict(ContentWord.from_text(line)))
+        db = cls(storage=MemoryStorage)
+        db.insert_multiple(content_words)
+        return db

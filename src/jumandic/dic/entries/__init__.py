@@ -1,3 +1,3 @@
-from jumandic.dic.entries.content_word import ContentWord, ContentWordList
+from jumandic.dic.entries.content_word import ContentWord, ContentWordDB
 
-__all__ = ["ContentWord", "ContentWordList"]
+__all__ = ["ContentWord", "ContentWordDB"]
