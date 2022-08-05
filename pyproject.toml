@@ -10,7 +10,7 @@ keywords = ["NLP"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
-tinydb = "^4.7.0"
+tinydb = "^4.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
