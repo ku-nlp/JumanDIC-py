@@ -6,15 +6,20 @@ jobs:
   test:
     name: Run tests with pytest
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 2
+      fail-fast: false
+      matrix:
+        python-version: [ "3.8", "3.9", "3.10" ]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Checkout submodules
       run: git submodule update --init --recursive
-    - name: Set up Python 3.9
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: 3.9
+        python-version: ${{ matrix.python-version }}
     - name: Install Poetry
       run: |
         python3 -m pip install --user pipx
