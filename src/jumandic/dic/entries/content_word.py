@@ -17,7 +17,7 @@ class ContentWord:
     reading: str  #: Reading.
     semantics: str  #: Semantics.
     pos: str  #: Part of speech.
-    subpos: str = "*"  #: Subpart of speech.
+    subpos: str = "*"  #: Part of speech (subtype).
     conjtype: str = "*"  #: Conjugation type.
 
     @classmethod
