@@ -1,0 +1,29 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run tests with pytest
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+    - name: Install Poetry
+      run: |
+        python3 -m pip install --user pipx
+        python3 -m pipx ensurepath
+        python3 -m pipx install poetry
+    - name: Add path for Python packages
+      run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        poetry config virtualenvs.create false
+        poetry install --no-interaction
+    - name: Run tests
+      run: |
+        poetry run pytest
