@@ -41,7 +41,7 @@ class ContentWord:
             elif k == "意味情報":
                 assert len(vs) == 1 and isinstance(vs[0], str)
                 args["semantics"] = vs[0]
-            elif k == "活用形":
+            elif k == "活用型":
                 assert len(vs) == 1 and isinstance(vs[0], str)
                 args["conjtype"] = vs[0]
         return cls(**args)
