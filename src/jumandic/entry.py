@@ -15,6 +15,8 @@ class Entry:
 
     @classmethod
     def from_sexp(cls, obj: Any) -> "Entry":
+        if obj[0] == "連語":
+            raise NotImplementedError("'連語' is not supported.")
         args = {}
         pos, obj = obj
         args["pos"] = pos

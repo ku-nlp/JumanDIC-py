@@ -69,16 +69,3 @@ def parse(input_text: str) -> Any:
         else:
             raise Exception("Syntax error: unknown syntax element.")
     return stack
-
-
-def is_empty_line(line: str) -> bool:
-    """Return True if the line is empty.
-
-    Args:
-        line: A line of text.
-    """
-    if line.strip() == "":
-        return True
-    if line.startswith(";"):
-        return True
-    return False

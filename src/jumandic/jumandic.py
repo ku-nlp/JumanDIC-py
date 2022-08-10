@@ -1,4 +1,5 @@
 from dataclasses import asdict
+from logging import getLogger
 from pathlib import Path
 from typing import Iterator, List, Optional, Union
 
@@ -8,6 +9,10 @@ from tinydb.storages import MemoryStorage
 
 from jumandic.entry import Entry
 from jumandic.sexp import parse
+from jumandic.utils import DuplicateFilter
+
+logger = getLogger(__name__)
+logger.addFilter(DuplicateFilter())
 
 
 class JumanDIC(TinyDB):
@@ -31,10 +36,11 @@ class JumanDIC(TinyDB):
     def __init__(self, path: Optional[Union[str, Path]] = None) -> None:
         super().__init__(storage=MemoryStorage)
         if path is None:
-            path = Path(__file__).parent / "data" / "JumanDIC"
+            self.path = Path(__file__).parent / "data" / "JumanDIC"
         else:
-            path = Path(path)
-        self.add_dictionary(path / "dic/ContentW.dic")
+            self.path = Path(path)
+        for path in self.path.glob("**/*.dic"):
+            self.add_dictionary(path)
 
     def add_dictionary(self, path: Union[str, Path]) -> None:
         """Add a dictionary to the JumanDIC repository.
@@ -44,8 +50,18 @@ class JumanDIC(TinyDB):
         """
         entries = []
         with open(path) as f:
-            for entry in parse(f.read()):
-                entries.append(asdict(Entry.from_sexp(entry)))
+            try:
+                sexps = parse(f.read())
+            except Exception as e:
+                logger.error(f"Failed to parse {path}: {e}")
+                return
+            for sexp in sexps:
+                try:
+                    entries.append(asdict(Entry.from_sexp(sexp)))
+                except NotImplementedError as e:
+                    logger.warning(f"Failed to parse an entry in {path}: {e}")
+                except Exception as e:
+                    logger.error(f"Failed to parse an entry in {path}: {e}")
         self.insert_multiple(entries)
 
     def all(self) -> List[Entry]:
