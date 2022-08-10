@@ -57,7 +57,7 @@ class JumanDIC(TinyDB):
                 return
             for sexp in sexps:
                 try:
-                    entries.append(asdict(Entry.from_sexp(sexp)))
+                    entries.append(asdict(Entry.from_sexp(sexp, path)))
                 except NotImplementedError as e:
                     logger.warning(f"Failed to parse an entry in {path}: {e}")
                 except Exception as e:
