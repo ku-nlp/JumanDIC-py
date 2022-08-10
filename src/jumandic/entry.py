@@ -16,10 +16,17 @@ class Entry:
     location: str = "*"  #: Location.
 
     def __str__(self) -> str:
+        """Convert to the string."""
         return self.to_sexp()
 
     @classmethod
     def from_sexp(cls, sexp: Any, path: Optional[Union[str, Path]] = None) -> "Entry":
+        """Create an entry from an S-expression.
+
+        Args:
+            sexp: S-expression.
+            path: Path to the file.
+        """
         if sexp[0] == "連語":
             raise NotImplementedError("'連語' is not supported.")
         args = {}
@@ -48,7 +55,7 @@ class Entry:
         return cls(**args)
 
     def to_sexp(self) -> str:
-        """Convert to sexp."""
+        """Convert to the S-expression."""
         rv = "(" + self.pos + " ("
         if self.subpos != "*":
             rv += self.subpos + " ("

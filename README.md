@@ -3,24 +3,31 @@
 A Python API for [JumanDIC](https://github.com/ku-nlp/JumanDIC).
 
 ```python
-import jumandic
+# Create a JumanDIC object.
+from jumandic import JumanDIC
+d = JumanDIC()
 
-# Create a JumanDIC instance.
-d = jumandic.JumanDIC()
-
-# Iterate over the entries in the dictionary.
+# Iterate over entries
 for entry in d:
-    print(entry.surf)  # Surface form(s).
-    print(entry.reading)  # Reading.
-    print(entry.pos)  # Part of speech.
-    print(entry.subpos)  # Part of speech (subtype).
-    print(entry.conjtype)  # Conjugation type.
-    print(entry.semantics)  # Semantics.
-    break
+    ...
 
-# Search for nouns.
+# Search entries
 from tinydb import Query
-
 q = Query()
 nouns = d.search(q.pos == "名詞")
 ```
+
+## Requirements
+
+- Python: 3.8+
+- [tinydb](https://github.com/msiemens/tinydb)
+
+## Installation
+
+```
+pip install git+https://github.com/ku-nlp/JumanDIC-py.git
+```
+
+## License
+
+MIT

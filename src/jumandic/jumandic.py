@@ -23,13 +23,17 @@ class JumanDIC(TinyDB):
 
     Example::
 
+        # Create a JumanDIC object.
         from jumandic import JumanDIC
-        from tinydb import Query
-
         d = JumanDIC()
-        q = Query()
 
-        # Find nouns:
+        # Iterate over entries
+        for entry in d:
+            ...
+
+        # Search entries
+        from tinydb import Query
+        q = Query()
         nouns = d.search(q.pos == "名詞")
     """
 
@@ -43,7 +47,7 @@ class JumanDIC(TinyDB):
             self.add_dictionary(path)
 
     def add_dictionary(self, path: Union[str, Path]) -> None:
-        """Add a dictionary to the JumanDIC repository.
+        """Add entries in a dictionary.
 
         Args:
             path: Path to the dictionary.
@@ -65,17 +69,21 @@ class JumanDIC(TinyDB):
         self.insert_multiple(entries)
 
     def all(self) -> List[Entry]:
+        """Return all entries."""
         return [Entry(**doc) for doc in super().__getattr__("all")()]
 
     def get(self, cond: Optional[QueryLike] = None, doc_id: Optional[int] = None) -> Optional[Entry]:
+        """Get an entry."""
         doc = super().__getattr__("get")(cond, doc_id)
         if doc is None:
             return None
         return Entry(**doc)
 
     def search(self, cond: QueryLike) -> List[Entry]:
+        """Search entries."""
         return [Entry(**doc) for doc in super().__getattr__("search")(cond)]
 
     def __iter__(self) -> Iterator[Entry]:
+        """Iterate over entries."""
         for doc in super().__iter__():
             yield Entry(**doc)
