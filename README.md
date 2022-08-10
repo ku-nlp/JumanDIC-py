@@ -1,6 +1,6 @@
 # JumanDIC-py
 
-A Python API for JumanDIC.
+A Python API for [JumanDIC](https://github.com/ku-nlp/JumanDIC).
 
 ```python
 import jumandic
