@@ -23,7 +23,7 @@ nouns = d.search(q.pos == "名詞")
 ## Requirements
 
 - Python: 3.8+
-- [tinydb](https://github.com/msiemens/tinydb)
+- [TinyDB](https://github.com/msiemens/tinydb)
 
 ## Installation
 
