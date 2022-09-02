@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jumandic"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Python API for JumanDIC"
 authors = ["Hirokazu Kiyomaru <h.kiyomaru@gmail.com>"]
 repository = "https://github.com/ku-nlp/JumanDIC-py"
