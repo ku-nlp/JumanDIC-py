@@ -51,6 +51,16 @@ class JumanDIC(TinyDB):
         else:
             raise FileNotFoundError(f"File or directory not found: {self.path}")
 
+    def export(self, path: Union[str, Path]) -> None:
+        """Export entries to a file.
+
+        Args:
+            path: Path to the file.
+        """
+        buff = "\n".join([entry.to_sexp() for entry in self.all()])
+        with open(path, "wt") as f:
+            f.write(buff)
+
     def add_dictionary(self, path: Union[str, Path]) -> None:
         """Add entries in a dictionary.
 

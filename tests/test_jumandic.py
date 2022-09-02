@@ -1,3 +1,5 @@
+import tempfile
+
 import pytest
 from tinydb import Query
 
@@ -33,3 +35,9 @@ def test_search(jumandic: JumanDIC):
     entries = jumandic.search(Query().pos == "名詞")
     assert len(entries) == 103904
     assert all(isinstance(e, Entry) for e in entries)
+
+
+def test_export(jumandic: JumanDIC):
+    with tempfile.NamedTemporaryFile() as f:
+        jumandic.export(f.name)
+        assert len(jumandic) == len(JumanDIC(f.name))
