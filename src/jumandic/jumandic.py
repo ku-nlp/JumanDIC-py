@@ -43,8 +43,13 @@ class JumanDIC(TinyDB):
             self.path = Path(__file__).parent / "data" / "JumanDIC"
         else:
             self.path = Path(path)
-        for path in self.path.glob("**/*.dic"):
-            self.add_dictionary(path)
+        if self.path.is_dir():
+            for path in self.path.glob("**/*.dic"):
+                self.add_dictionary(path)
+        elif self.path.is_file():
+            self.add_dictionary(self.path)
+        else:
+            raise FileNotFoundError(f"File or directory not found: {self.path}")
 
     def add_dictionary(self, path: Union[str, Path]) -> None:
         """Add entries in a dictionary.
