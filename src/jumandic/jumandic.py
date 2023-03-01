@@ -58,7 +58,7 @@ class JumanDIC(TinyDB):
             path: Path to the file.
         """
         buff = "\n".join([entry.to_sexp() for entry in self.all()])
-        with open(path, "wt") as f:
+        with open(path, "w") as f:
             f.write(buff)
 
     def add_dictionary(self, path: Union[str, Path]) -> None:
