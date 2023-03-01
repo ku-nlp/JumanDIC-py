@@ -1,6 +1,6 @@
 # JumanDIC-py
 
-[![Test](https://img.shields.io/github/workflow/status/ku-nlp/JumanDIC-py/test?logo=github&label=test&style=flat-square)](https://github.com/ku-nlp/JumanDIC-py/actions/workflows/test.yml)
+[![Test](https://img.shields.io/github/actions/workflow/status/ku-nlp/JumanDIC-py/test.yml?label=test&style=flat-square)](https://github.com/ku-nlp/JumanDIC-py/actions/workflows/test.yml)
 [![Code style - black](https://img.shields.io/badge/code%20style-black-222222?style=flat-square)](https://github.com/psf/black)
 
 A Python API for [JumanDIC](https://github.com/ku-nlp/JumanDIC).
